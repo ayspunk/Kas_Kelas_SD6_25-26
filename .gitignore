@@ -1,0 +1,15 @@
+# Data sensitif — jangan pernah di-upload
+*.xlsx
+*.xls
+
+# File sementara
+chart.umd.min.js
+
+# IDE & tools
+.idea/
+.claude/
+*.bat~
+
+# OS
+Thumbs.db
+.DS_Store

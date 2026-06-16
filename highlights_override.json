@@ -1,0 +1,47 @@
+{
+  "Juli 2025":     "Saldo dan tabungan kegiatan SD5 menjadi sumber penerimaan utama, sementara pengeluaran digunakan untuk outing Saung Angklung Udjo, ta'awun, dan operasional kelas",
+  "Agustus 2025":  "Penerimaan berasal dari donasi dana ta'awun, sedangkan pengeluaran digunakan untuk kegiatan HUT RI, outing perpustakaan, ta'awun, dan operasional kelas",
+  "September 2025":"Penerimaan berasal dari pengembalian dan mutasi dana transportasi outing, sedangkan pengeluaran digunakan untuk transportasi pendamping, ta'awun, dan kebutuhan kelas",
+  "Oktober 2025":  "Penerimaan berasal dari kegiatan penelitian dan donasi ta'awun, sedangkan pengeluaran digunakan untuk kegiatan penelitian, konsumsi kegiatan, dan operasional kelas",
+  "November 2025": "Penerimaan berasal dari donasi apresiasi Hari Guru, sedangkan pengeluaran digunakan untuk penyaluran Hari Guru, kegiatan penelitian, dan transportasi kegiatan",
+  "Desember 2025": "Penerimaan berasal dari donasi ta'awun purna tugas guru, sedangkan pengeluaran digunakan untuk penyaluran ta'awun dan operasional kelas",
+  "Januari 2026":  "Penerimaan berasal dari iuran kas kelas, sedangkan pengeluaran digunakan untuk operasional kelas dan penyaluran dana ta'awun",
+  "Februari 2026": "Penerimaan berasal dari iuran kas kelas dan mutasi tabungan, sedangkan pengeluaran digunakan untuk ta'awun dan operasional kelas",
+  "Maret 2026":    "Penerimaan berasal dari iuran kas kelas dan THR guru, sedangkan pengeluaran digunakan untuk penyaluran THR, transportasi kegiatan, dan operasional kelas",
+  "April 2026":    "Penerimaan berasal dari pengumpulan dana OASIXTH, sedangkan pengeluaran digunakan untuk DP OASIXTH, konsumsi kegiatan, dan operasional kelas",
+  "Mei 2026":      "Penerimaan berasal dari dana graduation, sponsor kegiatan, dan pelunasan OASIXTH, sedangkan pengeluaran digunakan untuk kegiatan graduation dan OASIXTH",
+  "Juni 2026":     "Penerimaan berasal dari dana graduation dan pengalihan sisa dana OASIXTH, sedangkan pengeluaran digunakan untuk graduation, buku tahunan, dan konsumsi acara",
+
+  "tawaunPenyaluran": [
+    {
+      "keterangan": "Bantuan untuk guru",
+      "matchKeywords": ["ms. nur", "miss nur", "bu azizah", "pak fathur", "pak mail", "pak andri"],
+      "periode": "Juli 2025, Agustus 2025, Desember 2025, Juni 2026"
+    },
+    {
+      "keterangan": "Bantuan untuk siswa/orang tua yang sakit",
+      "matchKeywords": ["bunda rafa", "siswa yang sakit", "zeyhan", "mba nana", "mba desti", "parcel buah untuk rafa"],
+      "periode": "September 2025, Januari 2026, Februari 2026, April 2026, Mei 2026"
+    },
+    {
+      "keterangan": "Apresiasi Hari Guru",
+      "matchKeywords": ["hari guru"],
+      "periode": "November 2025"
+    },
+    {
+      "keterangan": "Dana purna tugas guru",
+      "matchKeywords": ["pensiun", "purna tugas"],
+      "periode": "Desember 2025"
+    },
+    {
+      "keterangan": "THR guru",
+      "matchKeywords": ["thr", "tanda cinta"],
+      "periode": "Maret 2026"
+    },
+    {
+      "keterangan": "Lain-lain",
+      "matchKeywords": [],
+      "periode": "Juli 2025, September 2025, November 2025, April 2026, Mei 2026"
+    }
+  ]
+}
