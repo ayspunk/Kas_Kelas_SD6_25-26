@@ -1,5 +1,5 @@
 // Auto-generated oleh generate_report.py — JANGAN edit manual
-// Dibuat: 2026-06-16 22:28
+// Dibuat: 2026-06-16 22:59
 window.KASDATA = {
   "meta": {
     "periode": "Juli 2025 — Juni 2026",
@@ -728,5 +728,5 @@ window.KASDATA = {
       }
     }
   },
-  "generatedAt": "2026-06-16 22:28"
+  "generatedAt": "2026-06-16 22:59"
 };
