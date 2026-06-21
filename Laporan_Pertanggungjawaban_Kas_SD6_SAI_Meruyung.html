@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1024">
-<title>Laporan Pertanggungjawaban Kas — SD Kelas 6 SAI Meruyung</title>
+<title>Laporan Pertanggungjawaban Pengelolaan Dana SD6 Bangga</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/html-docx-js@0.3.1/dist/html-docx.js"></script>
 <script id="inlineData">
@@ -1000,17 +1000,17 @@ window.KASDATA = {
       Bismillahirrahmanirrahim. Segala puji bagi Allah SWT atas rahmat dan nikmat-Nya sehingga perjalanan panjang
       SD Kelas 6 Sekolah Alam Indonesia Meruyung selama satu tahun penuh dapat diselesaikan dengan penuh syukur.
       Laporan ini disusun sebagai wujud transparansi, amanah, dan <em>gotong royong</em> keluarga besar SD6 dalam
-      mengelola kas kelas sebagai titipan bersama.
+      mengelola dana kas, kegiatan, dan ta'awun sebagai titipan bersama.
     </p>
     <p>
       Sejalan dengan filosofi <strong>Sekolah Alam Indonesia</strong> yang memadukan belajar berbasis alam,
-      nilai-nilai Islam, dan pengembangan karakter, pengelolaan kas kelas ini mencerminkan prinsip yang sama:
+      nilai-nilai Islam, dan pengembangan karakter, pengelolaan dana kelas ini mencerminkan prinsip yang sama:
       keterbukaan (<em>transparency</em>), pertanggungjawaban (<em>accountability</em>), dan kepedulian sosial
       (<em>ta'awun</em>). Setiap rupiah yang masuk dan keluar dicatat dengan cermat, dikategorikan, dan kini
       dipertanggungjawabkan kepada seluruh Orang Tua/Wali Siswa (OTS).
     </p>
     <p id="narrativePendahuluan3">
-      Selama periode <strong id="narratifPeriode">—</strong>, kas kelas SD6 mengelola total <strong id="narratifTxn">—</strong>
+      Selama periode <strong id="narratifPeriode">—</strong>, pengelolaan dana SD6 Bangga mengelola total <strong id="narratifTxn">—</strong>
       yang mencakup kegiatan operasional harian, berbagai kegiatan belajar, solidaritas sosial (<em>ta'awun</em>),
       hingga penutupan yang meriah pada acara Graduation SD6 Bangga, sebuah perpisahan penuh kenangan yang
       merayakan tumbuhnya para "pemimpin alam" angkatan ini.
@@ -1029,7 +1029,7 @@ window.KASDATA = {
   </div>
   <div class="narrative">
     <p>
-      Kas kelas SD6 dibagi ke dalam tiga kategori utama: <strong>Kas</strong> (operasional dan iuran kelas),
+      Pengelolaan dana SD6 dibagi ke dalam tiga kategori utama: <strong>Kas</strong> (operasional dan iuran kelas),
       <strong>Kegiatan</strong> (outing, penelitian, OASIXTH, dan graduation), serta <strong>Ta'awun</strong>
       (dana solidaritas sosial). Seluruh kategori telah direkonsiliasi dan ditutup dengan saldo nihil,
       sehingga seluruh dana yang diterima telah dialokasikan dan dipertanggungjawabkan sesuai peruntukannya.
@@ -1079,8 +1079,8 @@ window.KASDATA = {
   </div>
   <div class="narrative">
     <p>
-      Grafik di bawah ini menampilkan pergerakan saldo kas kelas sepanjang tahun. Saldo awal di Juli 2025 cukup
-      tinggi karena membawa sisa kas dari SD5 (antara lain: sisa saldo kas, sisa FR pribadi anak, sisa FR kelas,
+      Grafik di bawah ini menampilkan pergerakan saldo dana SD6 Bangga sepanjang tahun. Saldo awal di Juli 2025 cukup
+      tinggi karena membawa sisa kas dari SD5 (antara lain: sisa saldo dana kelas, sisa FR pribadi anak, sisa FR kelas,
       sisa tabungan outing TNWK). Penurunan tajam di April 2026 disebabkan oleh pembayaran DP OASIXTH senilai Rp10 juta,
       sementara lonjakan di Mei 2026 mencerminkan masuknya dana OASIXTH, dana perpisahan dan sponsor TNWK SD5 dari
       Pertamina EP yang baru cair sebesar Rp10 juta. Penurunan di Juni 2026 adalah wajar karena dana graduation
@@ -1090,7 +1090,7 @@ window.KASDATA = {
 
   <div class="chart-row single">
     <div class="chart-box">
-      <h4>Saldo Kas Akhir Bulan (Rp)</h4>
+      <h4>Saldo Dana SD6 Akhir Bulan (Rp)</h4>
       <div class="chart-container" style="height:260px">
         <canvas id="chartSaldo"></canvas>
       </div>
@@ -2379,7 +2379,7 @@ function exportDocx() {
 
     /* ── build HTML ── */
     let body = `
-      <h1 style="text-align:center;color:#1B5E20;font-size:17pt;font-family:Calibri,sans-serif;margin:0 0 5pt">LAPORAN PERTANGGUNGJAWABAN KAS</h1>
+      <h1 style="text-align:center;color:#1B5E20;font-size:17pt;font-family:Calibri,sans-serif;margin:0 0 5pt">LAPORAN PERTANGGUNGJAWABAN PENGELOLAAN DANA SD6 BANGGA</h1>
       <p style="text-align:center;font-size:12pt;color:#2E7D32;font-family:Calibri,sans-serif;margin:0 0 3pt">${M.jumlahKelas} &mdash; SAI Meruyung</p>
       <p style="text-align:center;color:#616161;font-family:Calibri,sans-serif;margin:0 0 14pt">Tahun Ajaran ${M.tahunAjaran} &nbsp;&middot;&nbsp; ${M.periode}</p>
       ${tbl(['Keterangan','Detail'],[
@@ -2447,7 +2447,7 @@ function exportDocx() {
         ['Link Laporan Digital',      M.linkLaporan],
       ],[1]) +
       `<p style="color:#616161;font-size:9pt;margin-top:14pt;font-style:italic;font-family:Calibri,sans-serif">
-        Laporan ini disusun berdasarkan data real dari rekening dan catatan kas kelas SD6 SAI Meruyung.
+        Laporan ini disusun berdasarkan data real dari rekening dan catatan pengelolaan dana SD6 Bangga SAI Meruyung.
       </p>`;
 
     const fullHtml = '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body style="font-family:Calibri,sans-serif;font-size:11pt;color:#212121;margin:0">' + body + '</body></html>';
@@ -2460,7 +2460,7 @@ function exportDocx() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'Laporan_Kas_SD6_' + M.tahunAjaran.replace(/\s*\/\s*/g, '-') + '.docx';
+    a.download = 'Laporan_Pertanggungjawaban_SD6_Bangga_' + M.tahunAjaran.replace(/\s*\/\s*/g, '-') + '.docx';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
