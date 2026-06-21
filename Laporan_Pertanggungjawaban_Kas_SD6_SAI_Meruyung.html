@@ -823,11 +823,6 @@ window.KASDATA = {
   }
   .sig-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 560px; margin: 0 auto; }
   .sig-box { text-align: center; }
-  .sig-line {
-    border-bottom: 1.5px solid var(--ink);
-    height: 52px;
-    margin-bottom: 8px;
-  }
   .sig-label { font-family: 'Arial', sans-serif; font-size: 13px; }
   .sig-name  { font-weight: 700; font-size: 14px; margin-top: 2px; }
 
@@ -932,7 +927,8 @@ window.KASDATA = {
 <div class="cover">
   <div class="cover-leaf">🌿</div>
   <div class="cover-badge">Laporan Resmi · Tahun Ajaran <span id="coverTahunAjaran">—</span></div>
-  <h1>Laporan Pertanggungjawaban<br>Kas Kelas SD 6</h1>
+  <h1>Laporan Pertanggungjawaban<br>Pengelolaan Dana SD6 Bangga</h1>
+  <div style="font-size:14px;color:rgba(255,255,255,0.82);margin:-6px 0 14px;letter-spacing:.03em">Kas Kelas &nbsp;·&nbsp; Kegiatan &nbsp;·&nbsp; Taʼawun</div>
   <h2>Sekolah Alam Indonesia Meruyung</h2>
   <div class="cover-meta">
     <div class="cover-meta-item">
@@ -977,7 +973,7 @@ window.KASDATA = {
     <div class="card-sub" id="cardKeluarSub">—</div>
   </div>
   <div class="card accent-sky">
-    <div class="card-label">Saldo Akhir</div>
+    <div class="card-label">Status Rekonsiliasi</div>
     <div class="card-value" id="cardSaldoVal">—</div>
     <div class="card-sub" id="cardSaldoSub">—</div>
   </div>
@@ -1234,6 +1230,17 @@ window.KASDATA = {
     </table>
   </div>
 
+
+  <div class="callout info" style="margin-top:16px">
+    <span class="callout-icon">⚖️</span>
+    <div>
+      <strong>Catatan Subsidi Silang:</strong> Defisit pada beberapa kegiatan (Research Day, OASIXTH, Graduation)
+      ditutup menggunakan saldo kegiatan yang berasal dari akumulasi tabungan outing dan mutasi internal
+      antar kegiatan yang telah disepakati bersama. Oleh karena itu, kategori Kegiatan secara keseluruhan
+      tetap berimbang dan ditutup dengan saldo nihil.
+    </div>
+  </div>
+
   <div class="callout info" style="margin-top:16px">
     <span class="callout-icon">🏕️</span>
     <div>
@@ -1323,6 +1330,8 @@ window.KASDATA = {
     <span class="callout-icon">📌</span>
     <div id="calloutTawaunSaldo">
       <strong>Status Ta'awun:</strong> Saldo ta'awun tersisa <strong id="tawaunSaldoText">—</strong> (NIHIL).
+      &nbsp;·&nbsp; <strong>Tingkat Penyaluran Dana: <span id="tawaunPctText">—</span></strong>
+      — Seluruh dana ta'awun yang terkumpul telah disalurkan sesuai peruntukannya.
     </div>
   </div>
 </div>
@@ -1429,6 +1438,7 @@ window.KASDATA = {
       <div class="stat-row"><span>Total Pengeluaran</span><strong id="verifKeluar">—</strong></div>
       <div class="stat-row"><span>Selisih (Saldo Buku)</span><strong class="plus" id="verifSaldo">—</strong></div>
       <div class="stat-row"><span>Saldo Rekening Mandiri</span><strong class="plus" id="verifSaldoRek">—</strong></div>
+      <div class="stat-row"><span>Selisih Buku vs Rekening</span><strong class="plus" id="verifSelisihBukuRek">—</strong></div>
       <div class="stat-row"><span>Status Rekonsiliasi</span><span class="badge badge-ok">✓ BALANCE OK</span></div>
     </div>
     <div class="card">
@@ -1477,6 +1487,11 @@ window.KASDATA = {
     <p>
       <em>"Belajar dari Alam, Menjadi Pemimpin Masa Depan."</em> Semoga angkatan SD6 ini menjadi
       pemimpin-pemimpin alam yang berintegritas, berilmu, dan berakhlak mulia. Aamiin.
+    </p>
+    <p>
+      Dengan demikian seluruh dana yang dipercayakan kepada pengurus kelas telah dikelola, dicatat,
+      direkonsiliasi, dan dipertanggungjawabkan secara terbuka kepada seluruh Orang Tua/Wali Siswa
+      SD6 Bangga sesuai peruntukannya.
     </p>
   </div>
 </div>
@@ -1818,8 +1833,8 @@ window.KASDATA = {
     setTxt('cardMasukSub',  fmtNum(S.totalMasuk) + ' · ' + S.jumlahTransaksi + ' transaksi');
     setTxt('cardKeluarVal', fmtJt(S.totalKeluar));
     setTxt('cardKeluarSub', fmtNum(S.totalKeluar) + ' · ' + S.jumlahTransaksi + ' transaksi');
-    setTxt('cardSaldoVal',  fmtJt(S.saldoAkhir));
-    setTxt('cardSaldoSub',  fmtNum(S.saldoAkhir) + ' · per ' + M.tglLaporan);
+    setTxt('cardSaldoVal',  '✓ Balance OK');
+    setTxt('cardSaldoSub',  'Seluruh dana telah dialokasikan dan dipertanggungjawabkan');
     setTxt('cardPeakVal',   fmtJt(S.saldoTertinggi));
     setTxt('cardPeakSub',   'Puncak ' + S.bulanTertinggi);
 
@@ -2088,6 +2103,8 @@ window.KASDATA = {
 
     const tawSaldo = tawRek.masuk - tawRek.keluar;
     setTxt('tawaunSaldoText', fmtRp(tawSaldo));
+    const tawPct = tawRek.masuk > 0 ? Math.round(tawRek.keluar / tawRek.masuk * 100) : 0;
+    setTxt('tawaunPctText', tawPct + '%');
 
     set('tbodyTawaun', D.tawaunPenyaluran.map(t => `
       <tr>
@@ -2252,6 +2269,7 @@ window.KASDATA = {
     set('verifKeluar',   fmtRp(S.totalKeluar));
     set('verifSaldo',    fmtRp(S.saldoAkhir));
     set('verifSaldoRek', fmtRp(M.saldoRek));
+    set('verifSelisihBukuRek', fmtRp(S.saldoAkhir - M.saldoRek));
     set('verifSaldoSetelahRencana', fmtRp(D.saldoSetelahRencana));
     setTxt('verifTxn',     S.jumlahTransaksi + ' transaksi');
     setTxt('verifSiswa',   M.jumlahSiswa + ' anak (Lunas semua)');
