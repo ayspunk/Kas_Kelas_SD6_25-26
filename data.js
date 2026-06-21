@@ -1,5 +1,5 @@
 // Auto-generated oleh generate_report.py — JANGAN edit manual
-// Dibuat: 2026-06-21 11:46
+// Dibuat: 2026-06-21 12:07
 window.KASDATA = {
   "meta": {
     "periode": "Juli 2025 — Juni 2026",
@@ -380,7 +380,7 @@ window.KASDATA = {
   ],
   "rencana": [],
   "totalRencana": 0,
-  "saldoSetelahRencana": 255883,
+  "saldoSetelahRencana": 0,
   "siswa": [
     "Abyan Faezya",
     "Abyan Rasya",
@@ -455,5 +455,5 @@ window.KASDATA = {
       }
     }
   },
-  "generatedAt": "2026-06-21 11:46"
+  "generatedAt": "2026-06-21 12:07"
 };

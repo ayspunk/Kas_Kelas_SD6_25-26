@@ -410,7 +410,7 @@ def main():
     sunburst           = compute_sunburst(txns)
 
     total_rencana         = sum(r["nilai"] for r in rencana)
-    saldo_setelah_rencana = total_tabungan - total_rencana
+    saldo_setelah_rencana = summary["saldoAkhir"] - round(total_rencana)
 
     # Meta info (update manual jika berubah)
     meta = {

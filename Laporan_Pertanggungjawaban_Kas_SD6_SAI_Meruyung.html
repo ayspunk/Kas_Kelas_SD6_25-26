@@ -387,7 +387,7 @@ window.KASDATA = {
   ],
   "rencana": [],
   "totalRencana": 0,
-  "saldoSetelahRencana": 255883,
+  "saldoSetelahRencana": 0,
   "siswa": [
     "Abyan Faezya",
     "Abyan Rasya",
@@ -462,7 +462,7 @@ window.KASDATA = {
       }
     }
   },
-  "generatedAt": "2026-06-21 11:46"
+  "generatedAt": "2026-06-21 12:07"
 };
 </script>
 <script src="data.js"></script>
@@ -988,6 +988,9 @@ window.KASDATA = {
   </div>
 </div>
 
+<!-- ── STATUS REKONSILIASI ── -->
+<div class="callout success" id="execSummary" style="margin:0 0 28px"></div>
+
 <!-- ═══════════════════════════════════════════
      A. PENDAHULUAN
 ═══════════════════════════════════════════ -->
@@ -1032,8 +1035,8 @@ window.KASDATA = {
     <p>
       Kas kelas SD6 dibagi ke dalam tiga kategori utama: <strong>Kas</strong> (operasional dan iuran kelas),
       <strong>Kegiatan</strong> (outing, penelitian, OASIXTH, dan graduation), serta <strong>Ta'awun</strong>
-      (dana solidaritas sosial). Ketiga kategori ini mencatat saldo positif di akhir periode, menegaskan
-      bahwa pengelolaan keuangan kelas berjalan dengan sehat dan bertanggung jawab.
+      (dana solidaritas sosial). Seluruh kategori telah direkonsiliasi dan ditutup dengan saldo nihil,
+      sehingga seluruh dana yang diterima telah dialokasikan dan dipertanggungjawabkan sesuai peruntukannya.
     </p>
   </div>
 
@@ -1178,11 +1181,7 @@ window.KASDATA = {
     </div>
   </div>
 
-  <div class="section-header" style="margin-top:24px">
-    <div class="section-icon" style="background:#C8E6C9">👨‍👩‍👧</div>
-    <h3 style="font-size:16px;color:var(--earth)">Status Lunas Iuran Kas Semester 1 &amp; Semester 2</h3>
-  </div>
-  <div class="student-grid" id="studentGrid"></div>
+  <div id="studentSummary"></div>
 </div>
 
 <!-- ═══════════════════════════════════════════
@@ -1331,7 +1330,7 @@ window.KASDATA = {
 <!-- ═══════════════════════════════════════════
      G. RENCANA PENGELUARAN TERSISA
 ═══════════════════════════════════════════ -->
-<div class="section">
+<div class="section" id="secRencana">
   <div class="section-header">
     <div class="section-icon">📋</div>
     <h3>G. Rencana Pengeluaran Tersisa</h3>
@@ -1376,7 +1375,7 @@ window.KASDATA = {
 <div class="section">
   <div class="section-header">
     <div class="section-icon">📊</div>
-    <h3>H. Rekapitulasi Arus Kas</h3>
+    <h3 id="chapH">H. Rekapitulasi Arus Kas</h3>
   </div>
   <div class="narrative">
     <p>
@@ -1420,7 +1419,7 @@ window.KASDATA = {
 <div class="section">
   <div class="section-header">
     <div class="section-icon">✅</div>
-    <h3>I. Verifikasi Laporan</h3>
+    <h3 id="chapI">I. Verifikasi Laporan</h3>
   </div>
 
   <div class="two-col">
@@ -1462,7 +1461,7 @@ window.KASDATA = {
 <div class="section">
   <div class="section-header">
     <div class="section-icon">🌳</div>
-    <h3>J. Kata Penutup</h3>
+    <h3 id="chapJ">J. Kata Penutup</h3>
   </div>
   <div class="narrative">
     <p>
@@ -1490,14 +1489,12 @@ window.KASDATA = {
   </p>
   <div class="sig-row">
     <div class="sig-box">
-      <div class="sig-label" style="margin-bottom:4px">Disusun dan diverifikasi oleh,</div>
-      <div class="sig-line"></div>
+      <div class="sig-label" style="margin-bottom:8px">Disusun dan diverifikasi oleh</div>
       <div class="sig-label">Bendahara Kelas SD6 Bangga</div>
       <div class="sig-name" id="footerBendahara">—</div>
     </div>
     <div class="sig-box">
-      <div class="sig-label" style="margin-bottom:4px">Mengetahui,</div>
-      <div class="sig-line"></div>
+      <div class="sig-label" style="margin-bottom:8px">Mengetahui,</div>
       <div class="sig-label">Ketua Dewan Kelas SD6 Bangga</div>
       <div class="sig-name" id="footerKetuaDK">—</div>
     </div>
@@ -1837,14 +1834,18 @@ window.KASDATA = {
     const totalMasuk  = D.rekap.reduce((a,r)=>a+r.masuk, 0);
     const totalKeluar = D.rekap.reduce((a,r)=>a+r.keluar, 0);
 
-    set('tbodyRekap', D.rekap.map(r => `
-      <tr>
+    set('tbodyRekap', D.rekap.map(r => {
+      const bc = r.saldo > 0 ? 'badge-green' : r.saldo === 0 ? 'badge-ok' : 'badge-red';
+      const bt = r.saldo > 0 ? 'Surplus' : r.saldo === 0 ? 'Nihil' : 'Defisit';
+      const sc = r.saldo >= 0 ? 'plus' : 'minus';
+      return `<tr>
         <td><strong>${r.label}</strong><br><small style="color:var(--muted);font-family:Arial">${r.desc}</small></td>
         <td class="num">${fmtNum(r.masuk)}</td>
         <td class="num">${fmtNum(r.keluar)}</td>
-        <td class="num plus"><strong>${fmtNum(r.saldo)}</strong></td>
-        <td><span class="badge badge-green">Surplus</span></td>
-      </tr>`).join(''));
+        <td class="num ${sc}"><strong>${fmtNum(r.saldo)}</strong></td>
+        <td><span class="badge ${bc}">${bt}</span></td>
+      </tr>`;
+    }).join(''));
 
     set('tfootRekap', `
       <tr>
@@ -2007,8 +2008,24 @@ window.KASDATA = {
       options:{ ...baseOpts(), cutout:'58%' }
     });
 
-    /* Student grid */
-    set('studentGrid', D.siswa.map(s => `<div class="student-chip">${s} ✓</div>`).join(''));
+    /* Student summary (Issue 4) */
+    const lunas = D.siswa.length;
+    const belumLunas = M.jumlahSiswa - lunas;
+    set('studentSummary', `
+      <div class="tbl-wrap" style="margin-top:16px">
+        <table>
+          <thead><tr><th>Status</th><th class="num">Jumlah Siswa</th></tr></thead>
+          <tbody>
+            <tr><td>✅ Lunas</td><td class="num">${lunas}</td></tr>
+            <tr><td>⏳ Belum Lunas</td><td class="num">${belumLunas}</td></tr>
+          </tbody>
+          <tfoot><tr><td><strong>Total Siswa</strong></td><td class="num"><strong>${M.jumlahSiswa}</strong></td></tr></tfoot>
+        </table>
+      </div>
+      <div class="callout success" style="margin-top:12px">
+        <span class="callout-icon">🎉</span>
+        <div>Seluruh ${lunas} siswa telah melunasi iuran kas Semester 1 dan Semester 2.</div>
+      </div>`);
 
     /* ── Section E — Kegiatan ── */
     const kegTotal = { masuk:0, keluar:0 };
@@ -2080,11 +2097,14 @@ window.KASDATA = {
         <td>${t.periode}</td>
       </tr>`).join(''));
 
+    const tawBadge = tawSaldo === 0
+      ? `<span class="badge badge-ok">Saldo Nihil</span>`
+      : `<span class="badge badge-green">Saldo ${fmtRp(tawSaldo)} (aktif)</span>`;
     set('tfootTawaun', `
       <tr>
         <td><strong>TOTAL PENYALURAN</strong></td>
         <td class="num"><strong>${fmtNum(tawRek.keluar)}</strong></td>
-        <td><span class="badge badge-green">Saldo Rp${fmtNum(tawSaldo)} (aktif)</span></td>
+        <td>${tawBadge}</td>
       </tr>`);
 
     /* Chart 10 — Ta'awun penyaluran donut (group top 8) dengan persentase */
@@ -2240,6 +2260,30 @@ window.KASDATA = {
     setTxt('verifUpdated', D.generatedAt);
     const link = document.getElementById('verifLink');
     if (link) { link.href = M.linkLaporan; link.textContent = M.linkLaporan; }
+
+    /* ── Ringkasan Eksekutif (Issue 5) ── */
+    const statusRek = S.saldoAkhir === 0
+      ? '✓ Seluruh dana telah direkonsiliasi dan dipertanggungjawabkan'
+      : 'Saldo ' + fmtRp(S.saldoAkhir);
+    set('execSummary', `
+      <span class="callout-icon">📋</span>
+      <div>
+        <strong>Total Dana Dikelola:</strong> ${fmtJt(S.totalMasuk)}
+        &nbsp;·&nbsp; <strong>Transaksi:</strong> ${S.jumlahTransaksi}
+        &nbsp;·&nbsp; <strong>Siswa:</strong> ${M.jumlahSiswa}
+        &nbsp;·&nbsp; <span class="badge badge-ok">${statusRek}</span>
+      </div>`);
+
+    /* ── Sembunyikan Bab G jika rencana kosong (Issue 3) ── */
+    if (!D.rencana.length || !D.totalRencana) {
+      const secG = document.getElementById('secRencana');
+      if (secG) secG.style.display = 'none';
+      const remap = { chapH: 'G', chapI: 'H', chapJ: 'I' };
+      Object.entries(remap).forEach(([id, newLetter]) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = el.textContent.replace(/^[A-Z]\./, newLetter + '.');
+      });
+    }
 
     /* ── Footer ── */
     setTxt('footerTgl',      M.tglLaporan);
