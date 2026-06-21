@@ -1,5 +1,5 @@
 // Auto-generated oleh generate_report.py — JANGAN edit manual
-// Dibuat: 2026-06-16 22:59
+// Dibuat: 2026-06-21 11:46
 window.KASDATA = {
   "meta": {
     "periode": "Juli 2025 — Juni 2026",
@@ -11,40 +11,40 @@ window.KASDATA = {
     "noRek": "174-001-114-5778",
     "namaRek": "Wahyuni",
     "tglLaporan": "Juni 2026",
-    "saldoRek": 3521594,
+    "saldoRek": 0,
     "linkLaporan": "https://bit.ly/Kas_SD6_Bangga"
   },
   "summary": {
-    "totalMasuk": 109979865,
-    "totalKeluar": 106458271,
-    "saldoAkhir": 3521594,
+    "totalMasuk": 112622566,
+    "totalKeluar": 112622566,
+    "saldoAkhir": 0,
     "saldoTertinggi": 28204782,
     "bulanTertinggi": "Juni 2026",
-    "jumlahTransaksi": 516
+    "jumlahTransaksi": 539
   },
   "rekap": [
     {
       "kategori": "Kas",
       "label": "💰 Kas",
       "desc": "Iuran, operasional, konsumsi, administrasi",
-      "masuk": 19426212,
-      "keluar": 16160500,
-      "saldo": 3265712
+      "masuk": 19682094,
+      "keluar": 19682094,
+      "saldo": 0
     },
     {
       "kategori": "Kegiatan",
       "label": "🎒 Kegiatan",
       "desc": "Outing, penelitian, OASIXTH, graduation",
       "masuk": 72146853,
-      "keluar": 71890971,
-      "saldo": 255882
+      "keluar": 72146853,
+      "saldo": 0
     },
     {
       "kategori": "Ta'awun",
       "label": "🤝 Ta'awun",
       "desc": "Donasi sosial, santunan, THR guru",
-      "masuk": 18406800,
-      "keluar": 18406800,
+      "masuk": 20793619,
+      "keluar": 20793619,
       "saldo": 0
     }
   ],
@@ -117,22 +117,22 @@ window.KASDATA = {
     },
     {
       "bulan": "Juni 2026",
-      "saldoAkhir": 3521594,
-      "net": -22220278,
-      "highlight": "Penerimaan berasal dari dana graduation dan pengalihan sisa dana OASIXTH, sedangkan pengeluaran digunakan untuk graduation, buku tahunan, dan konsumsi acara"
+      "saldoAkhir": 0,
+      "net": -25741872,
+      "highlight": "Penerimaan berasal dari dana graduation dan pengalihan sisa dana OASIXTH, sedangkan pengeluaran digunakan untuk graduation, buku tahunan, dan pengembalian sisa dana"
     }
   ],
   "kasBreakdown": {
     "pemasukan": [
       {
+        "sub": "Saldo Pindahan",
+        "nilai": 9893605,
+        "desc": "Sisa kas SD5 + sisa outing TNWK"
+      },
+      {
         "sub": "Iuran Kas",
         "nilai": 9638489,
         "desc": "34 siswa lunas (Sem.1 + Sem.2)"
-      },
-      {
-        "sub": "Saldo Pindahan",
-        "nilai": 9637723,
-        "desc": "Sisa kas SD5 + sisa outing TNWK"
       },
       {
         "sub": "Donasi Balik",
@@ -143,7 +143,7 @@ window.KASDATA = {
     "pengeluaran": [
       {
         "sub": "Lainnya",
-        "nilai": 8284000,
+        "nilai": 11805594,
         "desc": "HUT RI Paniisan, dekor tumpeng, subsidi kegiatan, dll"
       },
       {
@@ -216,8 +216,8 @@ window.KASDATA = {
       "desc": "Iktikaf, mutasi internal, kegiatan incidental",
       "periode": "Sepanjang tahun",
       "masuk": 800000,
-      "keluar": 250000,
-      "saldo": 550000
+      "keluar": 505882,
+      "saldo": 294118
     }
   ],
   "tawaunSiswa": [
@@ -374,286 +374,13 @@ window.KASDATA = {
     },
     {
       "keterangan": "Lain-lain",
-      "nilai": 404300,
+      "nilai": 2791119,
       "periode": "Juli 2025, September 2025, November 2025, April 2026, Mei 2026"
     }
   ],
-  "rencana": [
-    {
-      "no": 1,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Abyan Faezya",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 2,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Abyan Rasya",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 3,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Aca",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.61764705887
-    },
-    {
-      "no": 4,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Adli",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 5,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Ajmala",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 6,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Akram",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.76916221053
-    },
-    {
-      "no": 7,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Al",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 99408.7691622103
-    },
-    {
-      "no": 8,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Albyan",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 9,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Algi",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 10,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Aya",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 11,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Baya",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96080.7691622103
-    },
-    {
-      "no": 12,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Caca",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 13,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Cenna",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 101408.7691622103
-    },
-    {
-      "no": 14,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Erdo",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 15,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Eyza",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 16,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Fahmi",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 17,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Faida ",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96684.76916221053
-    },
-    {
-      "no": 18,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Fairel",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 97036.76916221053
-    },
-    {
-      "no": 19,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Ghani",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 20,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Ghozi",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 21,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Hanis",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96141.7691622103
-    },
-    {
-      "no": 22,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Iyo",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 106050.7691622103
-    },
-    {
-      "no": 23,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Khalila",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96461.7691622103
-    },
-    {
-      "no": 24,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Laras ",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 25,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Mahira",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 26,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Mufid",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 27,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Mursi",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 28,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Nisa",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 29,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Oza",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 30,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Rafa",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 331050.7691622103
-    },
-    {
-      "no": 31,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Rakha",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 32,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Rif'at ",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 33,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Zeyhan",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    },
-    {
-      "no": 34,
-      "bulan": "Juni",
-      "keterangan": "Rencana pengembalian sisa saldo Ziyad",
-      "kategori": "Kas",
-      "sub": "Lainnya",
-      "nilai": 96050.7691622103
-    }
-  ],
-  "totalRencana": 3521594,
-  "saldoSetelahRencana": 0,
+  "rencana": [],
+  "totalRencana": 0,
+  "saldoSetelahRencana": 255883,
   "siswa": [
     "Abyan Faezya",
     "Abyan Rasya",
@@ -693,12 +420,12 @@ window.KASDATA = {
   "sunburst": {
     "KAS MASUK": {
       "Kas": {
-        "Lainnya": 9637723,
+        "Lainnya": 9893605,
         "Iuran Kas": 9638489,
         "Donasi": 150000
       },
       "Ta'awun": {
-        "Donasi": 18406800
+        "Donasi": 20793619
       },
       "Kegiatan": {
         "Outing": 26322721,
@@ -712,7 +439,7 @@ window.KASDATA = {
       "Kegiatan": {
         "Outing": 16114500,
         "Research": 4729000,
-        "Lainnya": 250000,
+        "Lainnya": 505882,
         "OASIXTH": 17513000,
         "Graduation": 33284471
       },
@@ -720,13 +447,13 @@ window.KASDATA = {
         "Operasional": 3070000,
         "Administrasi": 130500,
         "Konsumsi": 2476000,
-        "Lainnya": 8284000,
+        "Lainnya": 11805594,
         "Transportasi": 2200000
       },
       "Ta'awun": {
-        "Penyaluran": 18406800
+        "Penyaluran": 20793619
       }
     }
   },
-  "generatedAt": "2026-06-16 22:59"
+  "generatedAt": "2026-06-21 11:46"
 };
