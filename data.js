@@ -18,8 +18,8 @@ window.KASDATA = {
     "totalMasuk": 112622566,
     "totalKeluar": 112622566,
     "saldoAkhir": 0,
-    "saldoTertinggi": 28204782,
-    "bulanTertinggi": "Juni 2026",
+    "saldoTertinggi": 25741872,
+    "bulanTertinggi": "Mei 2026",
     "jumlahTransaksi": 539
   },
   "rekap": [

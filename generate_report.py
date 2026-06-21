@@ -149,11 +149,17 @@ def compute_summary(txns):
     total_keluar = sum(t["value"] for t in txns if t["arus_kas"] == "KAS KELUAR")
     saldo_akhir  = total_masuk - total_keluar
 
-    # Saldo tertinggi dari kolom SALDO (running balance)
-    all_saldos   = [t["saldo"] for t in txns if t["saldo"] > 0]
-    saldo_max    = max(all_saldos) if all_saldos else 0
-    peak_txn     = max(txns, key=lambda t: t["saldo"])
-    bulan_peak   = BULAN_LABEL.get(peak_txn["bulan"], peak_txn["bulan"])
+    # Saldo tertinggi = saldo akhir bulan tertinggi (bukan running balance mid-bulan)
+    month_end = defaultdict(float)
+    for t in txns:
+        if t["bulan"]:
+            month_end[t["bulan"]] = t["saldo"]
+    if month_end:
+        peak_bulan = max(month_end, key=lambda b: month_end[b])
+        saldo_max  = month_end[peak_bulan]
+        bulan_peak = BULAN_LABEL.get(peak_bulan, peak_bulan)
+    else:
+        saldo_max, bulan_peak = 0, ""
 
     return {
         "totalMasuk":     round(total_masuk),
