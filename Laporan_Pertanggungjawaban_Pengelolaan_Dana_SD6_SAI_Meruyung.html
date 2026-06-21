@@ -1328,10 +1328,11 @@ window.KASDATA = {
 
   <div class="callout success">
     <span class="callout-icon">📌</span>
-    <div id="calloutTawaunSaldo">
-      <strong>Status Ta'awun:</strong> Saldo ta'awun tersisa <strong id="tawaunSaldoText">—</strong> (NIHIL).
-      &nbsp;·&nbsp; <strong>Tingkat Penyaluran Dana: <span id="tawaunPctText">—</span></strong>
-      — Seluruh dana ta'awun yang terkumpul telah disalurkan sesuai peruntukannya.
+    <div id="calloutTawaunSaldo" style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px 28px">
+      <div><div style="font-size:11px;color:var(--muted);margin-bottom:2px">Dana Terkumpul</div><strong id="tawaunMasukVal">—</strong></div>
+      <div><div style="font-size:11px;color:var(--muted);margin-bottom:2px">Dana Tersalurkan</div><strong id="tawaunKeluarVal">—</strong></div>
+      <div><div style="font-size:11px;color:var(--muted);margin-bottom:2px">Saldo Akhir</div><strong id="tawaunSaldoText">—</strong></div>
+      <div><div style="font-size:11px;color:var(--muted);margin-bottom:2px">Tingkat Penyaluran</div><strong id="tawaunPctText">—</strong></div>
     </div>
   </div>
 </div>
@@ -1439,7 +1440,7 @@ window.KASDATA = {
       <div class="stat-row"><span>Selisih (Saldo Buku)</span><strong class="plus" id="verifSaldo">—</strong></div>
       <div class="stat-row"><span>Saldo Rekening Mandiri</span><strong class="plus" id="verifSaldoRek">—</strong></div>
       <div class="stat-row"><span>Selisih Buku vs Rekening</span><strong class="plus" id="verifSelisihBukuRek">—</strong></div>
-      <div class="stat-row"><span>Status Rekonsiliasi</span><span class="badge badge-ok">✓ BALANCE OK</span></div>
+      <div class="stat-row"><span>Status Rekonsiliasi</span><span class="badge" id="verifStatusBadge">—</span></div>
     </div>
     <div class="card">
       <div class="card-label">Statistik Transaksi</div>
@@ -1503,12 +1504,12 @@ window.KASDATA = {
   </p>
   <div class="sig-row">
     <div class="sig-box">
-      <div class="sig-label" style="margin-bottom:8px">Disusun dan diverifikasi oleh</div>
-      <div class="sig-label">Bendahara Kelas SD6 Bangga</div>
+      <div class="sig-label" style="margin-bottom:8px">Disusun dan Diverifikasi</div>
+      <div class="sig-label">Bendahara SD6 Bangga</div>
       <div class="sig-name" id="footerBendahara">—</div>
     </div>
     <div class="sig-box">
-      <div class="sig-label" style="margin-bottom:8px">Mengetahui,</div>
+      <div class="sig-label" style="margin-bottom:8px">Mengetahui</div>
       <div class="sig-label">Ketua Dewan Kelas SD6 Bangga</div>
       <div class="sig-name" id="footerKetuaDK">—</div>
     </div>
@@ -1819,6 +1820,11 @@ window.KASDATA = {
     const M = D.meta;
     const S = D.summary;
 
+    /* ── Rekonsiliasi check ── */
+    const isBalance     = Math.round(S.totalMasuk - S.totalKeluar) === S.saldoAkhir && S.saldoAkhir === M.saldoRek;
+    const balanceBadge  = isBalance ? 'badge-ok' : 'badge-red';
+    const balanceFull   = isBalance ? '✓ BALANCE OK' : '⚠ PERLU REKONSILIASI';
+
     /* ── Cover ── */
     setTxt('coverTahunAjaran', M.tahunAjaran);
     setTxt('coverPeriode',     M.periode);
@@ -1833,7 +1839,7 @@ window.KASDATA = {
     setTxt('cardMasukSub',  fmtNum(S.totalMasuk) + ' · ' + S.jumlahTransaksi + ' transaksi');
     setTxt('cardKeluarVal', fmtJt(S.totalKeluar));
     setTxt('cardKeluarSub', fmtNum(S.totalKeluar) + ' · ' + S.jumlahTransaksi + ' transaksi');
-    setTxt('cardSaldoVal',  '✓ Balance OK');
+    setTxt('cardSaldoVal',  isBalance ? '✓ Balance OK' : '⚠ Perlu Rekonsiliasi');
     setTxt('cardSaldoSub',  'Seluruh dana telah dialokasikan dan dipertanggungjawabkan');
     setTxt('cardPeakVal',   fmtJt(S.saldoTertinggi));
     setTxt('cardPeakSub',   'Puncak ' + S.bulanTertinggi);
@@ -1867,7 +1873,7 @@ window.KASDATA = {
         <td class="num"><strong>${fmtNum(totalMasuk)}</strong></td>
         <td class="num"><strong>${fmtNum(totalKeluar)}</strong></td>
         <td class="num plus"><strong>${fmtNum(totalMasuk - totalKeluar)}</strong></td>
-        <td><span class="badge badge-ok">✓ Balance OK</span></td>
+        <td><span class="badge ${balanceBadge}">${balanceFull}</span></td>
       </tr>`);
 
     /* ── Chart 1 & 2 — Rekap donut ── */
@@ -2104,7 +2110,9 @@ window.KASDATA = {
     const tawSaldo = tawRek.masuk - tawRek.keluar;
     setTxt('tawaunSaldoText', fmtRp(tawSaldo));
     const tawPct = tawRek.masuk > 0 ? Math.round(tawRek.keluar / tawRek.masuk * 100) : 0;
-    setTxt('tawaunPctText', tawPct + '%');
+    setTxt('tawaunPctText',   tawPct + '%');
+    setTxt('tawaunMasukVal',  fmtRp(tawRek.masuk));
+    setTxt('tawaunKeluarVal', fmtRp(tawRek.keluar));
 
     set('tbodyTawaun', D.tawaunPenyaluran.map(t => `
       <tr>
@@ -2277,6 +2285,8 @@ window.KASDATA = {
     setTxt('verifUpdated', D.generatedAt);
     const link = document.getElementById('verifLink');
     if (link) { link.href = M.linkLaporan; link.textContent = M.linkLaporan; }
+    const vbEl = document.getElementById('verifStatusBadge');
+    if (vbEl) { vbEl.className = 'badge ' + balanceBadge; vbEl.textContent = balanceFull; }
 
     /* ── Ringkasan Eksekutif (Issue 5) ── */
     const statusRek = S.saldoAkhir === 0
@@ -2288,7 +2298,7 @@ window.KASDATA = {
         <strong>Total Dana Dikelola:</strong> ${fmtJt(S.totalMasuk)}
         &nbsp;·&nbsp; <strong>Transaksi:</strong> ${S.jumlahTransaksi}
         &nbsp;·&nbsp; <strong>Siswa:</strong> ${M.jumlahSiswa}
-        &nbsp;·&nbsp; <span class="badge badge-ok">${statusRek}</span>
+        &nbsp;·&nbsp; <span class="badge ${balanceBadge}">${statusRek}</span>
       </div>`);
 
     /* ── Sembunyikan Bab G jika rencana kosong (Issue 3) ── */
@@ -2376,6 +2386,9 @@ function exportDocx() {
     function h1(t) {
       return `<h2 style="font-family:Calibri,sans-serif;color:#1B5E20;font-size:13pt;margin:18pt 0 6pt;border-bottom:1pt solid #A5D6A7;padding-bottom:2pt">${t}</h2>`;
     }
+    function p(t) {
+      return `<p style="font-family:Calibri,sans-serif;font-size:11pt;color:#212121;margin:0 0 8pt;text-align:justify">${t}</p>`;
+    }
 
     /* ── build HTML ── */
     let body = `
@@ -2391,7 +2404,12 @@ function exportDocx() {
         ['Data diperbarui', D.generatedAt],
       ])}
 
-      ${h1('Ringkasan Keuangan')}
+      ${h1('A. Pendahuluan')}
+      ${p('Bismillahirrahmanirrahim. Segala puji bagi Allah SWT atas rahmat dan nikmat-Nya sehingga perjalanan panjang SD Kelas 6 Sekolah Alam Indonesia Meruyung selama satu tahun penuh dapat diselesaikan dengan penuh syukur. Laporan ini disusun sebagai wujud transparansi, amanah, dan <em>gotong royong</em> keluarga besar SD6 dalam mengelola dana kas, kegiatan, dan ta\'awun sebagai titipan bersama.')}
+      ${p('Sejalan dengan filosofi <strong>Sekolah Alam Indonesia</strong> yang memadukan belajar berbasis alam, nilai-nilai Islam, dan pengembangan karakter, pengelolaan dana kelas ini mencerminkan prinsip yang sama: keterbukaan (<em>transparency</em>), pertanggungjawaban (<em>accountability</em>), dan kepedulian sosial (<em>ta\'awun</em>). Setiap rupiah yang masuk dan keluar dicatat dengan cermat, dikategorikan, dan kini dipertanggungjawabkan kepada seluruh OTS.')}
+      ${p(`Selama periode <strong>${M.periode}</strong>, pengelolaan dana SD6 Bangga mengelola total <strong>${S.jumlahTransaksi} transaksi</strong> yang mencakup kegiatan operasional harian, berbagai kegiatan belajar, solidaritas sosial, hingga penutupan yang meriah pada acara Graduation SD6 Bangga.`)}
+
+      ${h1('B. Ringkasan Keuangan')}
       ${tbl(['Arus Kas','Nilai (Rp)','Catatan'],[
         ['Total Kas Masuk',  rp(S.totalMasuk),  S.jumlahTransaksi + ' transaksi'],
         ['Total Kas Keluar', rp(S.totalKeluar), '—'],
@@ -2399,22 +2417,30 @@ function exportDocx() {
         ['Saldo Rekening',   rp(M.saldoRek),    'Mandiri ' + M.noRek],
       ],[1])}
 
-      ${h1('Rekapitulasi per Kategori')}
+      ${h1('C. Rekapitulasi per Kategori')}
       ${tbl(['Kategori','Kas Masuk (Rp)','Kas Keluar (Rp)','Saldo (Rp)'],
         D.rekap.map(r=>[r.kategori, rp(r.masuk), rp(r.keluar), rp(r.saldo)]),[1,2,3])}
 
-      ${h1('Tren Saldo Bulanan')}
+      ${h1('D. Tren Saldo Bulanan')}
       ${tbl(['Bulan','Saldo Akhir (Rp)','Net (Rp)','Highlight'],
         D.monthly.map(m=>[m.bulan, rp(m.saldoAkhir), rp(m.net), m.highlight]),[1,2])}
 
-      ${h1('Detail Kegiatan')}
+      ${h1('E. Kegiatan — Detail')}
       ${tbl(['Kegiatan','Periode','Dana Masuk (Rp)','Dana Keluar (Rp)','Saldo (Rp)'],
         D.kegiatan.map(k=>[k.label, k.periode, rp(k.masuk), rp(k.keluar), rp(k.saldo)]),[2,3,4])}
 
-      ${h1("Ta'awun — Penyaluran Dana")}
+      ${p('Keterangan singkat per kegiatan:')}
+      ${D.kegiatan.map(k => p(`<strong>${k.icon} ${k.label}</strong> (${k.periode}) — ${k.desc}. Dana masuk: <strong>${rp(k.masuk)}</strong>, Dana keluar: <strong>${rp(k.keluar)}</strong>.`)).join('')}
+
+      ${h1("F. Ta'awun — Penyaluran Dana")}
       ${tbl(['Peruntukan','Nilai (Rp)','Periode Penyaluran'],
         D.tawaunPenyaluran.map(t=>[t.keterangan, rp(t.nilai), t.periode]),[1])}
     `;
+
+    /* ── Ta'awun for DOCX ── */
+    const tawDocx    = D.rekap.find(r => r.kategori === "Ta'awun") || {masuk:0, keluar:0};
+    const tawDocxPct = tawDocx.masuk > 0 ? Math.round(tawDocx.keluar / tawDocx.masuk * 100) : 0;
+    body += p(`Dana ta\'awun terkumpul sebesar <strong>${rp(tawDocx.masuk)}</strong> dan telah disalurkan sebesar <strong>${rp(tawDocx.keluar)}</strong> (tingkat penyaluran <strong>${tawDocxPct}%</strong>). Saldo akhir ta\'awun: <strong>${rp(tawDocx.masuk - tawDocx.keluar)}</strong>. Penyaluran terbesar adalah THR Tanda Cinta Guru di bulan Ramadan Maret 2026 sebesar Rp5.000.000 yang diserahkan ke SAIM.`);
 
     if (D.rencana && D.rencana.length) {
       body += h1('Rencana Pengeluaran') +
@@ -2442,6 +2468,7 @@ function exportDocx() {
         ['Saldo Akhir (Perhitungan)', rp(S.saldoAkhir)],
         ['Saldo Rekening Mandiri',    rp(M.saldoRek)],
         ['Selisih',                   rp(S.saldoAkhir - M.saldoRek)],
+        ['Status Rekonsiliasi',        S.saldoAkhir === M.saldoRek ? '✓ BALANCE OK' : '⚠ PERLU REKONSILIASI'],
         ['Jumlah Transaksi',          S.jumlahTransaksi + ' transaksi'],
         ['Jumlah Siswa',              M.jumlahSiswa + ' anak (lunas semua)'],
         ['Link Laporan Digital',      M.linkLaporan],
@@ -2449,6 +2476,12 @@ function exportDocx() {
       `<p style="color:#616161;font-size:9pt;margin-top:14pt;font-style:italic;font-family:Calibri,sans-serif">
         Laporan ini disusun berdasarkan data real dari rekening dan catatan pengelolaan dana SD6 Bangga SAI Meruyung.
       </p>`;
+
+    body += h1('G. Kata Penutup') +
+      p('Satu tahun perjalanan anak-anak kami di SD6 telah ditandai bukan hanya dengan angka-angka dalam laporan ini, tetapi dengan kenangan yang tak ternilai: cerita semangat mereka sepulang dari Saung Udjo, rasa ingin tahu yang tumbuh menjadi karya riset membanggakan, kebersamaan di OASIXTH, dan air mata haru yang kami saksikan di Graduation <em>SD6 Bangga!</em>') +
+      p('Kami selaku orang tua menyampaikan rasa terima kasih yang sebesar-besarnya kepada seluruh OTS yang telah mempercayakan pengelolaan dana ini. Kepercayaan itu adalah amanah yang dijaga sepenuh hati. Terima kasih pula kepada semua pihak yang telah berdonasi dalam program ta\'awun.') +
+      p('<em>"Belajar dari Alam, Menjadi Pemimpin Masa Depan."</em> Semoga angkatan SD6 ini menjadi pemimpin-pemimpin alam yang berintegritas, berilmu, dan berakhlak mulia. Aamiin.') +
+      p('Dengan demikian seluruh dana yang dipercayakan kepada pengurus kelas telah dikelola, dicatat, direkonsiliasi, dan dipertanggungjawabkan secara terbuka kepada seluruh Orang Tua/Wali Siswa SD6 Bangga sesuai peruntukannya.');
 
     const fullHtml = '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body style="font-family:Calibri,sans-serif;font-size:11pt;color:#212121;margin:0">' + body + '</body></html>';
 

@@ -17,7 +17,7 @@ if errorlevel 1 (
 )
 echo.
 echo Membuka laporan di browser...
-start "" "Laporan_Pertanggungjawaban_Kas_SD6_SAI_Meruyung.html"
+start "" "Laporan_Pertanggungjawaban_Pengelolaan_Dana_SD6_SAI_Meruyung.html"
 echo.
 echo Selesai! Laporan sudah diperbarui.
 pause

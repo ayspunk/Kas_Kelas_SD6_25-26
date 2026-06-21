@@ -463,7 +463,7 @@ def main():
     print(f"  Saldo Akhir : Rp{summary['saldoAkhir']:,.0f}")
 
     # Inline data ke HTML agar file HTML bisa dishare tanpa data.js
-    html_file = BASE_DIR / "Laporan_Pertanggungjawaban_Kas_SD6_SAI_Meruyung.html"
+    html_file = BASE_DIR / "Laporan_Pertanggungjawaban_Pengelolaan_Dana_SD6_SAI_Meruyung.html"
     if html_file.exists():
         html_content = html_file.read_text(encoding="utf-8")
         inline_block = (
@@ -485,7 +485,7 @@ def main():
         else:
             print(f"  Share mode : placeholder inlineData tidak ditemukan, skip")
     print()
-    print("Buka Laporan_Pertanggungjawaban_Kas_SD6_SAI_Meruyung.html di browser.")
+    print("Buka Laporan_Pertanggungjawaban_Pengelolaan_Dana_SD6_SAI_Meruyung.html di browser.")
 
 
 if __name__ == "__main__":
