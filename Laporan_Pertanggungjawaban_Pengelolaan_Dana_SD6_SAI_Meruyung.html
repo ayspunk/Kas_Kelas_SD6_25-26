@@ -973,17 +973,18 @@ window.KASDATA = {
     <div class="card-sub" id="cardKeluarSub">—</div>
   </div>
   <div class="card accent-sky">
-    <div class="card-label">Status Rekonsiliasi</div>
-    <div class="card-value" id="cardSaldoVal">—</div>
-    <div class="card-sub" id="cardSaldoSub">—</div>
+    <div class="card-label">Saldo Akhir</div>
+    <div class="card-value" id="cardSaldoAkhirVal">—</div>
+    <div class="card-sub" id="cardSaldoAkhirSub">—</div>
   </div>
   <div class="card accent-earth">
-    <div class="card-label">Saldo Tertinggi</div>
-    <div class="card-value" id="cardPeakVal">—</div>
-    <div class="card-sub" id="cardPeakSub">—</div>
+    <div class="card-label">Status Rekonsiliasi</div>
+    <div class="card-value" id="cardRekVal">—</div>
+    <div class="card-sub" id="cardRekSub">—</div>
   </div>
 </div>
 
+<div id="dataWarning" class="callout" style="display:none;background:#fff8e1;border-left:4px solid #f9a825;margin:0 0 16px"><span class="callout-icon">⚠️</span><div id="dataWarningMsg"></div></div>
 <!-- ── STATUS REKONSILIASI ── -->
 <div class="callout success" id="execSummary" style="margin:0 0 28px"></div>
 
@@ -1024,15 +1025,15 @@ window.KASDATA = {
 <div class="section">
   <div class="section-header">
     <div class="section-icon">📊</div>
-    <h3>B. Rekap Arus Kas Keseluruhan</h3>
+    <h3>B. Rekap Arus Dana Keseluruhan</h3>
     <span class="section-period" id="rekapPeriode">—</span>
   </div>
   <div class="narrative">
     <p>
       Pengelolaan dana SD6 dibagi ke dalam tiga kategori utama: <strong>Kas</strong> (operasional dan iuran kelas),
       <strong>Kegiatan</strong> (outing, penelitian, OASIXTH, dan graduation), serta <strong>Ta'awun</strong>
-      (dana solidaritas sosial). Seluruh kategori telah direkonsiliasi dan ditutup dengan saldo nihil,
-      sehingga seluruh dana yang diterima telah dialokasikan dan dipertanggungjawabkan sesuai peruntukannya.
+      (dana solidaritas sosial). <span id="narratifRekapStatus">Seluruh kategori telah direkonsiliasi dan ditutup dengan saldo nihil,
+      sehingga seluruh dana yang diterima telah dialokasikan dan dipertanggungjawabkan sesuai peruntukannya.</span>
     </p>
   </div>
 
@@ -1385,12 +1386,12 @@ window.KASDATA = {
 <div class="section">
   <div class="section-header">
     <div class="section-icon">📊</div>
-    <h3 id="chapH">H. Rekapitulasi Arus Kas</h3>
+    <h3 id="chapH">H. Rekapitulasi Arus Dana</h3>
   </div>
   <div class="narrative">
     <p>
       Peta arus kas menggambarkan proporsi seluruh arus keuangan dalam satu tampilan terpadu.
-      Dari dalam ke luar: <strong>saldo akhir</strong> (pusat) → <strong>Kas Masuk / Kas Keluar</strong>
+      Dari dalam ke luar: <strong>saldo akhir</strong> (pusat) → <strong>Pemasukan / Pengeluaran</strong>
       → <strong>Kategori</strong> (Kas, Kegiatan, Ta'awun) → <strong>Sub Kategori</strong>.
       Arahkan kursor ke segmen untuk melihat detail nilai.
     </p>
@@ -1457,7 +1458,7 @@ window.KASDATA = {
     <div>
       <strong>Akurasi Data:</strong> Laporan ini telah melalui proses verifikasi silang antara catatan
       kas manual, mutasi rekening Bank Mandiri (a.n. Wahyuni), dan rekap pivot per kategori.
-      Status BALANCE OK telah terkonfirmasi secara otomatis melalui formula di spreadsheet master.
+      <span id="narratifVerifStatus">Status BALANCE OK telah terkonfirmasi secara otomatis melalui formula di spreadsheet master.</span>
       Link laporan lengkap: <a id="verifLink" href="#" target="_blank" style="color:var(--sky)">—</a>
     </div>
   </div>
@@ -1839,10 +1840,10 @@ window.KASDATA = {
     setTxt('cardMasukSub',  fmtNum(S.totalMasuk) + ' · ' + S.jumlahTransaksi + ' transaksi');
     setTxt('cardKeluarVal', fmtJt(S.totalKeluar));
     setTxt('cardKeluarSub', fmtNum(S.totalKeluar) + ' · ' + S.jumlahTransaksi + ' transaksi');
-    setTxt('cardSaldoVal',  isBalance ? '✓ Balance OK' : '⚠ Perlu Rekonsiliasi');
-    setTxt('cardSaldoSub',  'Seluruh dana telah dialokasikan dan dipertanggungjawabkan');
-    setTxt('cardPeakVal',   fmtJt(S.saldoTertinggi));
-    setTxt('cardPeakSub',   'Puncak ' + S.bulanTertinggi);
+    setTxt('cardSaldoAkhirVal', S.saldoAkhir === 0 ? 'Rp0' : fmtJt(S.saldoAkhir));
+    setTxt('cardSaldoAkhirSub', S.saldoAkhir === 0 ? 'Seluruh dana telah dialokasikan' : 'Saldo tersisa dari pengelolaan');
+    setTxt('cardRekVal',    isBalance ? '✓ Balance OK' : '⚠ Perlu Rekonsiliasi');
+    setTxt('cardRekSub',    isBalance ? 'Saldo buku = saldo rekening' : 'Terdapat selisih — perlu pengecekan');
 
     /* ── Pendahuluan ── */
     setTxt('narratifPeriode', M.periode);
@@ -2259,11 +2260,11 @@ window.KASDATA = {
       set('tbodyRekapArus', body);
       set('tfootRekapArus', `
         <tr>
-          <td colspan="3"><strong>Total Kas Masuk</strong></td>
+          <td colspan="3"><strong>Total Pemasukan</strong></td>
           <td class="num plus"><strong>${fmtNum(grandMasuk)}</strong></td>
         </tr>
         <tr>
-          <td colspan="3"><strong>Total Kas Keluar</strong></td>
+          <td colspan="3"><strong>Total Pengeluaran</strong></td>
           <td class="num minus"><strong>−${fmtNum(grandKeluar)}</strong></td>
         </tr>
         <tr>
@@ -2278,7 +2279,6 @@ window.KASDATA = {
     set('verifSaldo',    fmtRp(S.saldoAkhir));
     set('verifSaldoRek', fmtRp(M.saldoRek));
     set('verifSelisihBukuRek', fmtRp(S.saldoAkhir - M.saldoRek));
-    set('verifSaldoSetelahRencana', fmtRp(D.saldoSetelahRencana));
     setTxt('verifTxn',     S.jumlahTransaksi + ' transaksi');
     setTxt('verifSiswa',   M.jumlahSiswa + ' anak (Lunas semua)');
     setTxt('verifNoRek',   'Mandiri ' + M.noRek.replace(/-/g,''));
@@ -2287,6 +2287,12 @@ window.KASDATA = {
     if (link) { link.href = M.linkLaporan; link.textContent = M.linkLaporan; }
     const vbEl = document.getElementById('verifStatusBadge');
     if (vbEl) { vbEl.className = 'badge ' + balanceBadge; vbEl.textContent = balanceFull; }
+    setTxt('narratifRekapStatus', isBalance
+      ? 'Seluruh kategori telah direkonsiliasi dan ditutup dengan saldo nihil, sehingga seluruh dana yang diterima telah dialokasikan dan dipertanggungjawabkan sesuai peruntukannya.'
+      : '⚠ Terdapat selisih pada rekonsiliasi. Mohon lakukan pengecekan ulang data sebelum laporan diterbitkan.');
+    setTxt('narratifVerifStatus', isBalance
+      ? 'Status BALANCE OK telah terkonfirmasi secara otomatis melalui formula di spreadsheet master.'
+      : '⚠ Status rekonsiliasi memerlukan pengecekan lebih lanjut — terdapat selisih antara saldo buku dan saldo rekening.');
 
     /* ── Ringkasan Eksekutif (Issue 5) ── */
     const statusRek = S.saldoAkhir === 0
@@ -2300,6 +2306,29 @@ window.KASDATA = {
         &nbsp;·&nbsp; <strong>Siswa:</strong> ${M.jumlahSiswa}
         &nbsp;·&nbsp; <span class="badge ${balanceBadge}">${statusRek}</span>
       </div>`);
+
+    /* ── Audit Konsistensi Data (Task 5) ── */
+    (function() {
+      const issues = [];
+      const rekapMasuk  = D.rekap.reduce((a,r)=>a+r.masuk, 0);
+      const rekapKeluar = D.rekap.reduce((a,r)=>a+r.keluar, 0);
+      if (Math.abs(rekapMasuk  - S.totalMasuk)  > 1) issues.push('Total Rekap Masuk (' + fmtRp(rekapMasuk) + ') ≠ Summary (' + fmtRp(S.totalMasuk) + ')');
+      if (Math.abs(rekapKeluar - S.totalKeluar) > 1) issues.push('Total Rekap Keluar (' + fmtRp(rekapKeluar) + ') ≠ Summary (' + fmtRp(S.totalKeluar) + ')');
+      const tawRek2 = D.rekap.find(r => r.kategori === "Ta'awun") || {keluar:0};
+      const tawPenyaluran = D.tawaunPenyaluran.reduce((a,t)=>a+t.nilai, 0);
+      if (Math.abs(tawPenyaluran - tawRek2.keluar) > 1) issues.push("Total Penyaluran Ta'awun (" + fmtRp(tawPenyaluran) + ') ≠ Rekap Ta\'awun (' + fmtRp(tawRek2.keluar) + ')');
+      if (D.sunburst) {
+        const sbMasuk  = Object.values(D.sunburst['KAS MASUK']  || {}).flatMap(Object.values).reduce((a,v)=>a+v,0);
+        const sbKeluar = Object.values(D.sunburst['KAS KELUAR'] || {}).flatMap(Object.values).reduce((a,v)=>a+v,0);
+        if (Math.abs(sbMasuk  - S.totalMasuk)  > 1) issues.push('Sunburst Masuk (' + fmtRp(sbMasuk) + ') ≠ Summary (' + fmtRp(S.totalMasuk) + ')');
+        if (Math.abs(sbKeluar - S.totalKeluar) > 1) issues.push('Sunburst Keluar (' + fmtRp(sbKeluar) + ') ≠ Summary (' + fmtRp(S.totalKeluar) + ')');
+      }
+      if (issues.length) {
+        set('dataWarningMsg', '<strong>Ketidaksesuaian data terdeteksi:</strong><ul>' + issues.map(i=>'<li>'+i+'</li>').join('') + '</ul>');
+        const dw = document.getElementById('dataWarning');
+        if (dw) dw.style.display = 'flex';
+      }
+    })();
 
     /* ── Sembunyikan Bab G jika rencana kosong (Issue 3) ── */
     if (!D.rencana.length || !D.totalRencana) {
@@ -2411,14 +2440,14 @@ function exportDocx() {
 
       ${h1('B. Ringkasan Keuangan')}
       ${tbl(['Arus Kas','Nilai (Rp)','Catatan'],[
-        ['Total Kas Masuk',  rp(S.totalMasuk),  S.jumlahTransaksi + ' transaksi'],
-        ['Total Kas Keluar', rp(S.totalKeluar), '—'],
+        ['Total Pemasukan',  rp(S.totalMasuk),  S.jumlahTransaksi + ' transaksi'],
+        ['Total Pengeluaran', rp(S.totalKeluar), '—'],
         ['Saldo Akhir',      rp(S.saldoAkhir),  'Per ' + M.tglLaporan],
         ['Saldo Rekening',   rp(M.saldoRek),    'Mandiri ' + M.noRek],
       ],[1])}
 
       ${h1('C. Rekapitulasi per Kategori')}
-      ${tbl(['Kategori','Kas Masuk (Rp)','Kas Keluar (Rp)','Saldo (Rp)'],
+      ${tbl(['Kategori','Pemasukan (Rp)','Pengeluaran (Rp)','Saldo (Rp)'],
         D.rekap.map(r=>[r.kategori, rp(r.masuk), rp(r.keluar), rp(r.saldo)]),[1,2,3])}
 
       ${h1('D. Tren Saldo Bulanan')}
@@ -2457,14 +2486,14 @@ function exportDocx() {
             .forEach(([sub,val])=>sbRows.push([arus, kat, sub, rp(val)]));
         });
       });
-      body += h1('Rekapitulasi Arus Kas') +
-        tbl(['Arus Kas','Kategori','Sub Kategori','Nilai (Rp)'], sbRows, [3]);
+      body += h1('H. Rekapitulasi Arus Dana') +
+        tbl(['Arus Dana','Kategori','Sub Kategori','Nilai (Rp)'], sbRows, [3]);
     }
 
     body += h1('Verifikasi') +
       tbl(['Keterangan','Data'],[
-        ['Total Kas Masuk',           rp(S.totalMasuk)],
-        ['Total Kas Keluar',          rp(S.totalKeluar)],
+        ['Total Pemasukan',           rp(S.totalMasuk)],
+        ['Total Pengeluaran',         rp(S.totalKeluar)],
         ['Saldo Akhir (Perhitungan)', rp(S.saldoAkhir)],
         ['Saldo Rekening Mandiri',    rp(M.saldoRek)],
         ['Selisih',                   rp(S.saldoAkhir - M.saldoRek)],
